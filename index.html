@@ -234,9 +234,14 @@ function doLoad(){
 }
 
 /* ---- Data helpers ---- */
+/* 11 people get 2R+1G, 10 get 1R+2G -> totals: 32R / 31G */
+var TWO_GOLD = {"Aline":1,"Arbnora":1,"Christoph":1,"Claus":1,"Diego":1,"Florian":1,"Guy":1,"Lorena":1,"Nicole":1,"Seinab":1};
+function defaultAlloc(person){
+  return TWO_GOLD[person] ? {red:1,gold:2,ur:0,ug:0} : {red:2,gold:1,ur:0,ug:0};
+}
 function getAlloc(date,person){
   var k=date+"||"+person;
-  return allocations[k]||{red:2,gold:1,ur:0,ug:0};
+  return allocations[k]||defaultAlloc(person);
 }
 function remOf(a,type){return a[type]-(type==="red"?a.ur:a.ug);}
 function setAlloc(date,person,val){allocations[date+"||"+person]=val;}
